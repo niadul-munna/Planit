@@ -3,6 +3,7 @@
 import { TodoForm } from './todo-form';
 import { TodoList } from './todo-list';
 import { TodoFilters } from './todo-filters';
+import { DataBackup } from './data-backup';
 import { PWAInstall } from './pwa-install';
 import { ServiceWorkerRegistration } from './service-worker';
 import { useTodoStore } from '@/hooks/use-todo-store';
@@ -55,6 +56,7 @@ export function TodoApp() {
                 onSortChange={setSort}
                 onClearCompleted={clearCompleted}
               />
+              <DataBackup />
             </div>
 
             {/* Main Content */}

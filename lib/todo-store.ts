@@ -15,6 +15,32 @@ class TodoStore {
   private saveToStorage() {
     if (typeof window !== 'undefined') {
       localStorage.setItem('todos', JSON.stringify(this.todos));
+      // Auto-backup with timestamp (keep last 5 backups)
+      this.createAutoBackup();
+    }
+  }
+
+  private createAutoBackup() {
+    if (typeof window !== 'undefined') {
+      const backupKey = `todos_backup_${Date.now()}`;
+      const backupData = {
+        todos: this.todos,
+        timestamp: new Date().toISOString()
+      };
+
+      localStorage.setItem(backupKey, JSON.stringify(backupData));
+
+      // Clean old backups (keep only last 5)
+      const allKeys = Object.keys(localStorage);
+      const backupKeys = allKeys
+        .filter(key => key.startsWith('todos_backup_'))
+        .sort()
+        .reverse();
+
+      // Remove old backups beyond the 5 most recent
+      backupKeys.slice(5).forEach(key => {
+        localStorage.removeItem(key);
+      });
     }
   }
 
