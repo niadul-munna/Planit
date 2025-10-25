@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Trash2, CheckCircle2, Circle, List } from 'lucide-react';
 import { TodoFilter, TodoSort } from '@/types/todo';
 
@@ -30,6 +32,7 @@ export function TodoFilters({
   onSortChange,
   onClearCompleted,
 }: TodoFiltersProps) {
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const filterOptions: { value: TodoFilter; label: string; icon: React.ReactNode }[] = [
     { value: 'all', label: 'All', icon: <List className="h-3 w-3 md:h-4 md:w-4" /> },
     { value: 'active', label: 'Active', icon: <Circle className="h-3 w-3 md:h-4 md:w-4" /> },
@@ -124,15 +127,30 @@ export function TodoFilters({
 
         {/* Clear Completed */}
         {stats.completed > 0 && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onClearCompleted}
-            className="w-full text-destructive hover:text-destructive text-xs md:text-sm"
-          >
-            <Trash2 className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-            Clear Completed ({stats.completed})
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowConfirmDialog(true)}
+              className="w-full text-destructive hover:text-destructive text-xs md:text-sm"
+            >
+              <Trash2 className="h-3 w-3 md:h-4 md:w-4 mr-2" />
+              Clear Completed ({stats.completed})
+            </Button>
+
+            <ConfirmDialog
+              open={showConfirmDialog}
+              onOpenChange={setShowConfirmDialog}
+              title="Clear Completed Tasks"
+              description={`Are you sure you want to delete ${stats.completed} completed task${
+                stats.completed === 1 ? '' : 's'
+              }? This action cannot be undone.`}
+              confirmText="Confirm"
+              cancelText="Cancel"
+              variant="destructive"
+              onConfirm={onClearCompleted}
+            />
+          </>
         )}
       </CardContent>
     </Card>
