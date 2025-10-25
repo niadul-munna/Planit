@@ -82,15 +82,15 @@ export function TodoFilters({
                 onClick={() => onFilterChange(option.value)}
                 className="flex items-center justify-center gap-1 text-xs md:text-sm px-2 md:px-3 py-2 h-auto min-h-[44px] relative overflow-hidden"
               >
-                <span className="flex-shrink-0">{option.icon}</span>
+                <span className="shrink-0">{option.icon}</span>
                 <span className="text-center leading-tight">{option.label}</span>
                 {option.value === 'active' && stats.active > 0 && (
-                  <Badge variant="secondary" className="ml-1 text-xs px-1 py-0 flex-shrink-0">
+                  <Badge variant="secondary" className="ml-1 text-xs px-1 py-0 shrink-0">
                     {stats.active}
                   </Badge>
                 )}
                 {option.value === 'completed' && stats.completed > 0 && (
-                  <Badge variant="secondary" className="ml-1 text-xs px-1 py-0 flex-shrink-0">
+                  <Badge variant="secondary" className="ml-1 text-xs px-1 py-0 shrink-0">
                     {stats.completed}
                   </Badge>
                 )}

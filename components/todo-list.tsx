@@ -15,7 +15,6 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { DraggableTodoItem } from './draggable-todo-item';
-import { TodoItem } from './todo-item';
 import { Todo } from '@/types/todo';
 import { CheckCircle2, ListTodo } from 'lucide-react';
 

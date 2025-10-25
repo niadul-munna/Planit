@@ -114,7 +114,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
           <Checkbox
             checked={todo.completed}
             onCheckedChange={() => onToggle(todo.id)}
-            className="mt-1 flex-shrink-0"
+            className="mt-1 shrink-0"
           />
 
           <div className="flex-1 min-w-0">
@@ -161,7 +161,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
                   </h3>
                   <Badge
                     variant="secondary"
-                    className={cn('text-xs flex-shrink-0', priorityConfig[todo.priority].color)}
+                    className={cn('text-xs shrink-0', priorityConfig[todo.priority].color)}
                   >
                     {priorityConfig[todo.priority].icon}
                     <span className="ml-1">{priorityConfig[todo.priority].label}</span>
@@ -181,7 +181,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-blue-200/60">
                   <div className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3 flex-shrink-0" />
+                    <Calendar className="h-3 w-3 shrink-0" />
                     <span>Created {formatDate(todo.createdAt)}</span>
                   </div>
                   {todo.updatedAt.getTime() !== todo.createdAt.getTime() && (
@@ -192,7 +192,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
             )}
           </div>
 
-          <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="flex items-center gap-1 shrink-0">
             {isEditing ? (
               <>
                 <Button
